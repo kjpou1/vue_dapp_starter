@@ -49,3 +49,9 @@ Notes on customizing this app:
   - `wallet.ts` manages the user's wallet connection
   - `data.ts` atomically polls for data each block using `Multicall2`
   - `settings.ts` saves and manages user settings such as dark mode and wallet selection
+
+
+## Inspiration
+
+- [vue3-dapp-starter](https://github.com/chnejohnson/vue3-dapp-starter)
+- [vue-tailwind-ethereum-template](https://github.com/ScopeLift/vue-tailwind-ethereum-template)
