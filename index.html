@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <link rel="icon" href="/favicon.ico" />
+  <title>Vue 3 Dapp Starter</title>
+</head>
+
+<body>
+  <noscript>
+    <strong>
+      We're sorry but this site doesn't work properly without JavaScript enabled. Please enable it to continue.
+    </strong>
+  </noscript>
+  <div id="app"></div>
+
+  <script>
+    window.global = window
+    let global = globalThis
+  </script>
+
+  <script type="module">
+    import process from 'process'
+    window.process = process
+  </script>
+
+  <script type="module">
+    import buffer from 'buffer'
+    window.Buffer = buffer.Buffer
+  </script>
+
+  <script type="module">
+    import util from 'util'
+    window.util = util
+  </script>
+
+  <script type="module" src="/src/main.ts"></script>
+  <!-- built files will be auto injected -->
+</body>
+
+</html>
