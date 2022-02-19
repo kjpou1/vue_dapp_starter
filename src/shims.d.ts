@@ -13,7 +13,6 @@ declare module 'nightwind/helper';
 // Shims for environment variables
 interface ImportMeta {
   env: {
-    VITE_BLOCKNATIVE_API_KEY: string;
     VITE_INFURA_API_KEY: string;
   };
 }
