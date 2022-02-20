@@ -28,7 +28,7 @@
           tabindex="0"
           @click="toggleDarkMode"
           @keydown.space.prevent="toggleDarkMode"
-          :aria-checked="isDark.toString()"
+          :aria-checked="isDark"
         >
           <span
             aria-hidden="true"
