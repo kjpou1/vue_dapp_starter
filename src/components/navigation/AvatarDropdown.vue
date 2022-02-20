@@ -169,67 +169,69 @@
   </div>
 </template>
 
-<script lang="ts">
-import { computed, ref, defineComponent } from 'vue';
+<script setup lang="ts">
+import { computed, ref } from 'vue';
+import { useRouter } from 'vue-router';
 import useWalletStore from 'src/store/wallet';
 import { toSvg } from 'jdenticon';
 const { userAddress } = useWalletStore();
 
-export default defineComponent({
-  name: 'AvatarDropdown',
-  setup() {
-    let avatar_menu_show = ref<boolean>(false);
-    let focusedIndex = 0;
-    let jidenticon = computed(() => toSvg(userAddress, 50));
-    async function disconnect() {
-      const { disconnectWallet } = useWalletStore();
-      await disconnectWallet();
-      this.$router.push({ name: 'home' });
-    }
+const router = useRouter();
+const dropdown: any = ref(null);
+const avatar_menu_show = ref<boolean>(false);
+let focusedIndex = 0;
 
-    return {
-      avatar_menu_show,
-      jidenticon,
-      focusedIndex,
-      disconnect,
-    };
-  },
-  methods: {
-    toggleDropdown() {
-      this.avatar_menu_show = !this.avatar_menu_show;
-    },
-    hideDropdown() {
-      this.avatar_menu_show = false;
-      this.focusedIndex = 0;
-    },
-    startArrowKeys() {
-      if (this.avatar_menu_show) {
-        // this.$refs.settings.focus();
-        this.$refs.dropdown.children[0].children[0].focus();
-        this.focusedIndex = 0;
-      }
-    },
-    focusPrevious(isArrowKey: boolean) {
-      this.focusedIndex -= 1;
-      if (isArrowKey) {
-        this.focusItem();
-      }
-    },
-    focusNext(isArrowKey: boolean) {
-      this.focusedIndex += 1;
-      if (isArrowKey) {
-        this.focusItem();
-      }
-    },
-    focusItem() {
-      if (this.$refs.dropdown.children[this.focusedIndex].children[0]) {
-        this.$refs.dropdown.children[this.focusedIndex].children[0].focus();
-      } else {
-        this.$refs.dropdown.children[this.focusedIndex].focus();
-      }
-    },
-  },
-});
+const jidenticon = computed(() => toSvg(userAddress, 50));
+
+const disconnect = async () => {
+  const { disconnectWallet } = useWalletStore();
+  await disconnectWallet();
+  router.push({ name: 'home' });
+};
+
+const toggleDropdown = () => {
+  avatar_menu_show.value = !avatar_menu_show.value;
+};
+
+const hideDropdown = () => {
+  avatar_menu_show.value = false;
+  focusedIndex = 0;
+};
+
+const startArrowKeys = () => {
+  try {
+    if (avatar_menu_show.value && dropdown?.value) {
+      dropdown.value.children[0].children[0].focus();
+      focusedIndex = 0;
+    }
+  } catch {
+    /* left blank */
+  }
+};
+const focusPrevious = (isArrowKey: boolean) => {
+  focusedIndex -= 1;
+  if (isArrowKey) {
+    focusItem();
+  }
+};
+const focusNext = (isArrowKey: boolean) => {
+  focusedIndex += 1;
+  if (isArrowKey) {
+    focusItem();
+  }
+};
+
+const focusItem = () => {
+  try {
+    if (dropdown.value.children[focusedIndex]?.children[0]) {
+      dropdown.value.children[focusedIndex].children[0].focus();
+    } else {
+      dropdown.value.children[focusedIndex].focus();
+    }
+  } catch {
+    /* left blank */
+  }
+};
 </script>
 
 <style scoped>
