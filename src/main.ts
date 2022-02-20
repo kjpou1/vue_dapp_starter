@@ -1,6 +1,4 @@
-// <script src="https://cdn.rawgit.com/dmester/jdenticon/5bbdf8cb/dist/jdenticon.min.js"></script>;
 import { createApp } from 'vue';
-import Vue from 'vue';
 // https://github.com/VinceG/vue-click-away#readme
 import VueClickAway from 'vue3-click-away';
 
